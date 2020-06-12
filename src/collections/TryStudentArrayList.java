@@ -1,12 +1,15 @@
 package collections;
 
+import collections.hash.set.HashSetReimplement;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public class TryStudentArrayList {
-  public static void main(String [] args) {
+  private static void checkArrayListImplementation() {
     LocalDate date = LocalDate.now();
     Student st0 = new Student("Paul", date, "These are some details about this student");
     Student st1 = new Student("Kerry", date, "More details...");
@@ -25,5 +28,15 @@ public class TryStudentArrayList {
     arrSt.remove(st1);
     System.out.println("AFTER REMOVING: ");
     System.out.println(arrSt);
+  }
+
+  private static void checkHashSetImplementation() {
+    Set<Student> st = new HashSetReimplement<>();
+    System.out.println(st);
+  }
+
+  public static void main(String [] args) {
+    // checkArrayListImplementation();
+    checkHashSetImplementation();
   }
 }

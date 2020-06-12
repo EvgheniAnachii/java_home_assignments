@@ -1,11 +1,13 @@
 package collections;
-
+import java.lang.Object;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Student {
   private String name;
   private LocalDate dateOfBirth;
   private String details;
+  private int id = UUID.randomUUID().hashCode();
 
   public Student(String name, LocalDate dateOfBirth, String details) {
     this.name = name;
@@ -28,12 +30,13 @@ public class Student {
   @Override
   public boolean equals(Object st) {
     Student student = (Student) st;
-    return student.name == name && student.dateOfBirth.equals(dateOfBirth);
+    boolean toReturn = student.name == name && student.dateOfBirth.equals(dateOfBirth);
+    return toReturn;
   }
 
   @Override
   public int hashCode() {
-    return name.length() + dateOfBirth.getDayOfMonth() + dateOfBirth.getMonthValue() + dateOfBirth.getYear() % 2;
+    return id;
   }
 
   @Override

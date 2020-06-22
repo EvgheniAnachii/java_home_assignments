@@ -7,12 +7,13 @@ public class Student {
   private String name;
   private LocalDate dateOfBirth;
   private String details;
-  private int id = UUID.randomUUID().hashCode();
+  private int id;
 
   public Student(String name, LocalDate dateOfBirth, String details) {
     this.name = name;
     this.dateOfBirth = dateOfBirth;
     this.details = details;
+    id = UUID.randomUUID().hashCode();
   }
 
   public String getName () {

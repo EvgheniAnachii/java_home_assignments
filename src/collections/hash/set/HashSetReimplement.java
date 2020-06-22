@@ -4,8 +4,8 @@ import collections.Student;
 
 import java.util.*;
 
-public class HashSetReimplement implements Set<Student> {
-  private Map<Integer, Student> localInstance;
+public class HashSetReimplement<E> implements Set<E> {
+  private HashMap<Integer, Student> localInstance;
   private int key = 0;
 
   public HashSetReimplement() {
@@ -44,13 +44,18 @@ public class HashSetReimplement implements Set<Student> {
   }
 
   @Override
-  public Iterator<Student> iterator() {
+  public Iterator<E> iterator() {
     return null;
   }
 
   @Override
   public Object[] toArray() {
-    return new Object[0];
+    Student [] arr = new Student[localInstance.size()];
+    int i = 0;
+    for (Map.Entry<Integer, Student> st: localInstance.entrySet()){
+      arr[i] = new Student(st.getValue().getName(), st.getValue().getDateOfBirth(), st.getValue().getDetails());
+    }
+    return arr;
   }
 
   @Override
@@ -59,9 +64,10 @@ public class HashSetReimplement implements Set<Student> {
   }
 
   @Override
-  public boolean add(Student student) {
+  public boolean add(E o) {
+    Student student = (Student)o;
     int oldSize = localInstance.size();
-    localInstance.put(key, student);
+    localInstance.put(student.hashCode(), student);
     key++;
     int newSize = localInstance.size();
     return newSize > oldSize;
@@ -71,7 +77,7 @@ public class HashSetReimplement implements Set<Student> {
   public boolean remove(Object o) {
     int oldSize = localInstance.size();
     Student st = (Student) o;
-    localInstance.remove(st);
+    localInstance.remove(st.hashCode());
     key--;
     int newSize = localInstance.size();
     return newSize < oldSize;
@@ -83,8 +89,15 @@ public class HashSetReimplement implements Set<Student> {
   }
 
   @Override
-  public boolean addAll(Collection<? extends Student> c) {
-    return false;
+  public boolean addAll(Collection<? extends E> c) {
+    int i = 0;
+    Iterator it = c.iterator();
+    while (it.hasNext()) {
+      add((E) it.next());
+      i++;
+    }
+
+    return i > 0;
   }
 
   @Override
@@ -99,6 +112,6 @@ public class HashSetReimplement implements Set<Student> {
 
   @Override
   public void clear() {
-
+    localInstance.clear();
   }
 }

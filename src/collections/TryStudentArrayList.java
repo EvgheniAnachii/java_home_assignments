@@ -1,5 +1,6 @@
 package collections;
 
+import collections.hash.map.HashMapReimplement;
 import collections.hash.set.HashSetReimplement;
 
 import java.time.LocalDate;
@@ -25,6 +26,19 @@ public class TryStudentArrayList {
     arrSt.remove(st1);
     System.out.println("AFTER REMOVING: ");
     System.out.println(arrSt);
+  }
+
+  private static void tryHashMap() {
+    Student st = new Student("Jally", LocalDate.now(), "some details");
+    Student st2 = new Student("Peter", LocalDate.now(), "some ");
+    HashMapReimplement<String, Student> hashMapSt = new HashMapReimplement<>();
+    hashMapSt.put("myFirstSt", st);
+    hashMapSt.put("myFirstSnd", st2);
+    hashMapSt.put("myThird", st2);
+    hashMapSt.put("myFourth", st2);
+    System.out.println(hashMapSt);
+    System.out.println("FOUND: "+hashMapSt.get("myFirstSt"));
+    System.out.println("FOUND: "+hashMapSt.get(st2));
   }
 
   private static void checkHashSetImplementation() {
@@ -60,6 +74,7 @@ public class TryStudentArrayList {
 
   public static void main(String [] args) {
     // checkArrayListImplementation();
-    checkHashSetImplementation();
+    //checkHashSetImplementation();
+    tryHashMap();
   }
 }
